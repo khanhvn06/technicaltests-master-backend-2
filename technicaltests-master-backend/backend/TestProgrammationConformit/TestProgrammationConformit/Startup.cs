@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TestProgrammationConformit.Infrastructures;
+using TestProgrammationConformit.Models;
 
 namespace TestProgrammationConformit
 {
@@ -27,16 +28,20 @@ namespace TestProgrammationConformit
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<TodoContext>(opt =>
+                                               opt.UseInMemoryDatabase("TodoList"));
+
             services.AddControllers();
 
-            services.AddDbContext<ConformitContext>(options =>
+            /*services.AddDbContext<ConformitContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("ConformitDb"),
                     npgsqlOptionsAction: sqlOptions =>
                     {
                         sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
                     });
-            });
+            });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

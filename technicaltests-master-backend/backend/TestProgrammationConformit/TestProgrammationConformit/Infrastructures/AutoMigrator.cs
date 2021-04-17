@@ -25,7 +25,7 @@ namespace TestProgrammationConformit.Infrastructures
                 {
                     logger.LogInformation($"Migrating database associated with context {typeof(TContext).Name}");
 
-                    context.Database.Migrate();
+                    //context.Database.Migrate();
 
                     logger.LogInformation($"Migrated database associated with context {typeof(TContext).Name}");
                 }
