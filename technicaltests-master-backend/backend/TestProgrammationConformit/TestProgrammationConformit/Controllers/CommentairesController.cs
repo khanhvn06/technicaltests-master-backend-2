@@ -20,15 +20,16 @@ namespace TestProgrammationConformit.Controllers
             _context = context;
         }
 
-        // GET: api/Commentaires
+        [Route("~/api/GetCommentaire")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Commentaire>>> GetCommentaires()
         {
+            IList<Commentaire> commentaires = _context.Commentaires.Include(c => c.Evenement).ToList();
             return await _context.Commentaires.ToListAsync();
         }
 
-        // GET: api/Commentaires/5
-        [HttpGet("{id}")]
+        [Route("~/api/GetCommentaire/{id}")]
+        [HttpGet]
         public async Task<ActionResult<Commentaire>> GetCommentaire(long id)
         {
             var commentaire = await _context.Commentaires.FindAsync(id);
@@ -41,9 +42,8 @@ namespace TestProgrammationConformit.Controllers
             return commentaire;
         }
 
-        // PUT: api/Commentaires/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [Route("~/api/UpdateCommentaire/{id}")]
+        [HttpPut]
         public async Task<IActionResult> PutCommentaire(long id, Commentaire commentaire)
         {
             if (id != commentaire.CommentaireId)
@@ -72,8 +72,7 @@ namespace TestProgrammationConformit.Controllers
             return NoContent();
         }
 
-        // POST: api/Commentaires
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Route("~/api/AddCommentaire")]
         [HttpPost]
         public async Task<ActionResult<Commentaire>> PostCommentaire(Commentaire commentaire)
         {
@@ -83,8 +82,8 @@ namespace TestProgrammationConformit.Controllers
             return CreatedAtAction("GetCommentaire", new { id = commentaire.CommentaireId }, commentaire);
         }
 
-        // DELETE: api/Commentaires/5
-        [HttpDelete("{id}")]
+        [Route("~/api/DeleteCommentaire/{id}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteCommentaire(long id)
         {
             var commentaire = await _context.Commentaires.FindAsync(id);

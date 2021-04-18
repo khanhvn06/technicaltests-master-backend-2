@@ -19,7 +19,7 @@ namespace TestProgrammationConformit.Models
         public DbSet<Commentaire> Commentaires { get; set; }
 
 
-       protected override void OnModelCreating(ModelBuilder modelBuilder)//Config one to many
+       /*protected override void OnModelCreating(ModelBuilder modelBuilder)//Config one to many
         {
             modelBuilder.Entity<Commentaire>()
                 .HasOne<Evenement>(s => s.Evenement)
@@ -34,7 +34,7 @@ namespace TestProgrammationConformit.Models
                 .WithOne(s => s.Evenement)
                 .OnDelete(DeleteBehavior.SetNull); ;
        }
-
+       */
     }
 }
 

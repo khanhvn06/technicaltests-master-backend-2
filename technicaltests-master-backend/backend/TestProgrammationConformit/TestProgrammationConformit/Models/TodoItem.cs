@@ -14,7 +14,7 @@ namespace TestProgrammationConformit.Models
 
         public string Personne { get; set; }
 
-        public ICollection<Commentaire> Commentaire { get; set; }
+        public IList<Commentaire> Commentaires { get; set; }
     }
 
     public class Commentaire

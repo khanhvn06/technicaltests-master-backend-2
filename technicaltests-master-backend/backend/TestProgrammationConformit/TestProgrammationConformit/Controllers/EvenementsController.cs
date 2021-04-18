@@ -20,15 +20,17 @@ namespace TestProgrammationConformit.Controllers
             _context = context;
         }
 
-        // GET: api/Evenements
+        
+        [Route("~/api/GetEvenement")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Evenement>>> GetEvenements()
         {
             return await _context.Evenements.ToListAsync();
         }
 
-        // GET: api/Evenements/5
-        [HttpGet("{id}")]
+       
+        [Route("~/api/GetEvenement/{id}")]
+        [HttpGet]
         public async Task<ActionResult<Evenement>> GetEvenement(long id)
         {
             var evenement = await _context.Evenements.FindAsync(id);
@@ -41,9 +43,10 @@ namespace TestProgrammationConformit.Controllers
             return evenement;
         }
 
-        // PUT: api/Evenements/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        
+        
+        [Route("~/api/UpdateEvenement/{id}")]
+        [HttpPut]
         public async Task<IActionResult> PutEvenement(long id, Evenement evenement)
         {
             if (id != evenement.Id)
@@ -72,8 +75,8 @@ namespace TestProgrammationConformit.Controllers
             return NoContent();
         }
 
-        // POST: api/Evenements
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    
+        [Route("~/api/AddEvenement")]
         [HttpPost]
         public async Task<ActionResult<Evenement>> PostEvenement(Evenement evenement)
         {
@@ -83,8 +86,8 @@ namespace TestProgrammationConformit.Controllers
             return CreatedAtAction("GetEvenement", new { id = evenement.Id }, evenement);
         }
 
-        // DELETE: api/Evenements/5
-        [HttpDelete("{id}")]
+        [Route("~/api/DeleteEvenement/{id}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteEvenement(long id)
         {
             var evenement = await _context.Evenements.FindAsync(id);
