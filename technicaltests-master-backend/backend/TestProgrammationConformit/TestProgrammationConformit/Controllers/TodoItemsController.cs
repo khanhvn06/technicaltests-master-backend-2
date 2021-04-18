@@ -22,16 +22,17 @@ namespace TestProgrammationConformit.Controllers
 
         // GET: api/TodoItems
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
+        public async Task<ActionResult<IEnumerable<Evenement>>> GetTodoItems()
         {
-            return await _context.TodoItems.ToListAsync();
+            return await _context.Evenements.ToListAsync();
         }
+
 
         // GET: api/TodoItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
+        public async Task<ActionResult<Evenement>> GetTodoItem(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = await _context.Evenements.FindAsync(id);
 
             if (todoItem == null)
             {
@@ -45,7 +46,7 @@ namespace TestProgrammationConformit.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
+        public async Task<IActionResult> PutTodoItem(long id, Evenement todoItem)
         {
             if (id != todoItem.Id)
             {
@@ -77,9 +78,9 @@ namespace TestProgrammationConformit.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
+        public async Task<ActionResult<Evenement>> PostTodoItem(Evenement todoItem)
         {
-            _context.TodoItems.Add(todoItem);
+            _context.Evenements.Add(todoItem);
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
@@ -88,15 +89,15 @@ namespace TestProgrammationConformit.Controllers
 
         // DELETE: api/TodoItems/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TodoItem>> DeleteTodoItem(long id)
+        public async Task<ActionResult<Evenement>> DeleteTodoItem(long id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = await _context.Evenements.FindAsync(id);
             if (todoItem == null)
             {
                 return NotFound();
             }
 
-            _context.TodoItems.Remove(todoItem);
+            _context.Evenements.Remove(todoItem);
             await _context.SaveChangesAsync();
 
             return todoItem;
@@ -104,7 +105,7 @@ namespace TestProgrammationConformit.Controllers
 
         private bool TodoItemExists(long id)
         {
-            return _context.TodoItems.Any(e => e.Id == id);
+            return _context.Evenements.Any(e => e.Id == id);
         }
     }
 }

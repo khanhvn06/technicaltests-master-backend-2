@@ -32,16 +32,20 @@ namespace TestProgrammationConformit
             services.AddDbContext<TodoContext>(opt =>
                                                opt.UseInMemoryDatabase("TodoList"));
 
+
+
             services.AddControllers();
 
-            /*services.AddDbContext<ConformitContext>(options =>
-            {
-                options.UseNpgsql(Configuration.GetConnectionString("ConformitDb"),
-                    npgsqlOptionsAction: sqlOptions =>
-                    {
-                        sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
-                    });
-            });*/
+        /* services.AddDbContext<TodoContext>(options =>
+         {
+             options.UseNpgsql(Configuration.GetConnectionString("ConformitDb"),
+                 npgsqlOptionsAction: sqlOptions =>
+                 {
+                     sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                 });
+         });*/
+
+        //Tried using postgresql but not work. Got the error: "ExtendedSocketException: No connection could be made because the target machine actively refused it. [::1]:5432"
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
