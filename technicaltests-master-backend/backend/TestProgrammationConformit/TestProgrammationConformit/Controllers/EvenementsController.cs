@@ -11,47 +11,47 @@ namespace TestProgrammationConformit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentairesController : ControllerBase
+    public class EvenementsController : ControllerBase
     {
         private readonly TodoContext _context;
 
-        public CommentairesController(TodoContext context)
+        public EvenementsController(TodoContext context)
         {
             _context = context;
         }
 
-        // GET: api/Commentaires
+        // GET: api/Evenements
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Commentaire>>> GetCommentaires()
+        public async Task<ActionResult<IEnumerable<Evenement>>> GetEvenements()
         {
-            return await _context.Commentaires.ToListAsync();
+            return await _context.Evenements.ToListAsync();
         }
 
-        // GET: api/Commentaires/5
+        // GET: api/Evenements/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Commentaire>> GetCommentaire(long id)
+        public async Task<ActionResult<Evenement>> GetEvenement(long id)
         {
-            var commentaire = await _context.Commentaires.FindAsync(id);
+            var evenement = await _context.Evenements.FindAsync(id);
 
-            if (commentaire == null)
+            if (evenement == null)
             {
                 return NotFound();
             }
 
-            return commentaire;
+            return evenement;
         }
 
-        // PUT: api/Commentaires/5
+        // PUT: api/Evenements/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCommentaire(long id, Commentaire commentaire)
+        public async Task<IActionResult> PutEvenement(long id, Evenement evenement)
         {
-            if (id != commentaire.CommentaireId)
+            if (id != evenement.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(commentaire).State = EntityState.Modified;
+            _context.Entry(evenement).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace TestProgrammationConformit.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CommentaireExists(id))
+                if (!EvenementExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace TestProgrammationConformit.Controllers
             return NoContent();
         }
 
-        // POST: api/Commentaires
+        // POST: api/Evenements
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Commentaire>> PostCommentaire(Commentaire commentaire)
+        public async Task<ActionResult<Evenement>> PostEvenement(Evenement evenement)
         {
-            _context.Commentaires.Add(commentaire);
+            _context.Evenements.Add(evenement);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCommentaire", new { id = commentaire.CommentaireId }, commentaire);
+            return CreatedAtAction("GetEvenement", new { id = evenement.Id }, evenement);
         }
 
-        // DELETE: api/Commentaires/5
+        // DELETE: api/Evenements/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCommentaire(long id)
+        public async Task<IActionResult> DeleteEvenement(long id)
         {
-            var commentaire = await _context.Commentaires.FindAsync(id);
-            if (commentaire == null)
+            var evenement = await _context.Evenements.FindAsync(id);
+            if (evenement == null)
             {
                 return NotFound();
             }
 
-            _context.Commentaires.Remove(commentaire);
+            _context.Evenements.Remove(evenement);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CommentaireExists(long id)
+        private bool EvenementExists(long id)
         {
-            return _context.Commentaires.Any(e => e.CommentaireId == id);
+            return _context.Evenements.Any(e => e.Id == id);
         }
     }
 }

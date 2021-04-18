@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/TodoItems",
+      "launchUrl": "api/Evenements",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "TestProgrammationConformit": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/TodoItems",
+      "launchUrl": "api/Evenements",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/TodoItems",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Evenements",
       "publishAllPorts": true
     }
   }

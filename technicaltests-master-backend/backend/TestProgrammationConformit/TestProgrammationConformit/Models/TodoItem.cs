@@ -19,7 +19,7 @@ namespace TestProgrammationConformit.Models
 
     public class Commentaire
     {
-        public long Id { get; set; }
+        public long CommentaireId { get; set; }
 
         public string Description { get; set; }
 
