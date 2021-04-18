@@ -19,22 +19,14 @@ namespace TestProgrammationConformit.Models
         public DbSet<Commentaire> Commentaires { get; set; }
 
 
-       /*protected override void OnModelCreating(ModelBuilder modelBuilder)//Config one to many
+        protected override void OnModelCreating(ModelBuilder modelBuilder)// relationship one to many
         {
             modelBuilder.Entity<Commentaire>()
-                .HasOne<Evenement>(s => s.Evenement)
-                 
-                .WithMany(g => g.Commentaire)
-                .IsRequired();
-               
-                
+                .HasOne(c => c.Evenement)
+                .WithMany(e => e.Commentaires)
+                .HasForeignKey(c => c.EvenementId);
+        }
 
-            modelBuilder.Entity<Evenement>()
-                .HasMany<Commentaire>(g => g.Commentaire)
-                .WithOne(s => s.Evenement)
-                .OnDelete(DeleteBehavior.SetNull); ;
-       }
-       */
     }
 }
 

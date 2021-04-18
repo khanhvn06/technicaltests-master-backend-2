@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/Evenements",
+      "launchUrl": "api/GetEvenement",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "TestProgrammationConformit": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/Evenements",
+      "launchUrl": "api/GetEvenement",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Evenements",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/GetEvenement",
       "publishAllPorts": true
     }
   }

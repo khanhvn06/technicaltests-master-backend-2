@@ -14,7 +14,7 @@ namespace TestProgrammationConformit.Models
 
         public string Personne { get; set; }
 
-        public IList<Commentaire> Commentaires { get; set; }
+        public List<Commentaire> Commentaires { get; set; }
     }
 
     public class Commentaire
@@ -25,7 +25,8 @@ namespace TestProgrammationConformit.Models
 
         public string Date { get; set; }
 
-        public int EvenementId { get; set; }
+        
+        public long EvenementId { get; set; }
 
         public Evenement Evenement { get; set; }
     }

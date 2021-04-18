@@ -24,7 +24,6 @@ namespace TestProgrammationConformit.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Commentaire>>> GetCommentaires()
         {
-            IList<Commentaire> commentaires = _context.Commentaires.Include(c => c.Evenement).ToList();
             return await _context.Commentaires.ToListAsync();
         }
 
@@ -76,6 +75,7 @@ namespace TestProgrammationConformit.Controllers
         [HttpPost]
         public async Task<ActionResult<Commentaire>> PostCommentaire(Commentaire commentaire)
         {
+           
             _context.Commentaires.Add(commentaire);
             await _context.SaveChangesAsync();
 
