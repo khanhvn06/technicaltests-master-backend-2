@@ -9,6 +9,10 @@ using TestProgrammationConformit.Models;
 
 namespace TestProgrammationConformit.Controllers
 {
+  
+
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class EvenementsController : ControllerBase
@@ -20,18 +24,34 @@ namespace TestProgrammationConformit.Controllers
             _context = context;
         }
 
-        
+        private bool TodoItemExists(long id) =>
+                _context.Evenements.Any(e => e.Id == id);
+
+        private static EvenementDTO ItemToDTO(Evenement todoItem) =>
+            new EvenementDTO
+            {
+                Id = todoItem.Id,
+                Titre = todoItem.Titre,
+                Description = todoItem.Description,
+                Personne = todoItem.Personne,
+                
+            };
+
+
+
+
+
         [Route("~/api/GetEvenement")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Evenement>>> GetEvenements()
+        public async Task<ActionResult<IEnumerable<EvenementDTO>>> GetEvenements()
         {
-            return await _context.Evenements.ToListAsync();
+            return await _context.Evenements.Select(x=> ItemToDTO(x)).ToListAsync();
         }
 
        
         [Route("~/api/GetEvenement/{id}")]
         [HttpGet]
-        public async Task<ActionResult<Evenement>> GetEvenement(long id)
+        public async Task<ActionResult<EvenementDTO>> GetEvenement(long id)
         {
             var evenement = await _context.Evenements.FindAsync(id);
 
@@ -40,21 +60,32 @@ namespace TestProgrammationConformit.Controllers
                 return NotFound();
             }
 
-            return evenement;
+            return ItemToDTO(evenement);
         }
 
         
         
         [Route("~/api/UpdateEvenement/{id}")]
         [HttpPut]
-        public async Task<IActionResult> PutEvenement(long id, Evenement evenement)
+        public async Task<IActionResult> PutEvenement(long id, EvenementDTO evenementDTO)
         {
-            if (id != evenement.Id)
+            if (id != evenementDTO.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(evenement).State = EntityState.Modified;
+            //_context.Entry(evenement).State = EntityState.Modified;
+            var evenement = await _context.Evenements.FindAsync(id);
+            if (evenement == null)
+            {
+                return NotFound();
+            }
+
+
+            evenement.Titre = evenementDTO.Titre;
+            evenement.Description = evenementDTO.Description;
+            evenement.Personne = evenementDTO.Personne;
+          
 
             try
             {
@@ -78,12 +109,21 @@ namespace TestProgrammationConformit.Controllers
     
         [Route("~/api/AddEvenement")]
         [HttpPost]
-        public async Task<ActionResult<Evenement>> PostEvenement(Evenement evenement)
+        public async Task<ActionResult<EvenementDTO>> PostEvenement(EvenementDTO evenementDTO)
         {
+
+            var evenement = new Evenement
+            {
+                Titre = evenementDTO.Titre,
+                Description = evenementDTO.Description,
+                Personne = evenementDTO.Personne,
+               
+            };
+
             _context.Evenements.Add(evenement);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvenement", new { id = evenement.Id }, evenement);
+            return CreatedAtAction("GetEvenement", new { id = evenement.Id }, ItemToDTO(evenement));
         }
 
         [Route("~/api/DeleteEvenement/{id}")]

@@ -15,6 +15,23 @@ namespace TestProgrammationConformit.Models
         public string Personne { get; set; }
 
         public List<Commentaire> Commentaires { get; set; }
+
+        public string Hidden { get; set; }  //for DTO 
+    }
+
+
+    public class EvenementDTO
+    {
+        public long Id { get; set; }
+        public string Titre { get; set; }
+
+        [StringLength(100, ErrorMessage = "The Description value cannot exceed 100 characters. ")] public string Description { get; set; }
+
+        public string Personne { get; set; }
+
+        public List<Commentaire> Commentaires { get; set; }
+
+       
     }
 
     public class Commentaire
